@@ -46,7 +46,7 @@ var parseState = function(title, data) {
 
 var reloadObjects = function() {
   ajax({
-    url: "http://" + Settings.option("host") + "/sub?json(types)",
+    url: "http://" + Settings.option("host") + "/sub?json(types,fields=state)",
     type: 'json',
     },
     function(data) {
@@ -63,8 +63,8 @@ var reloadObjects = function() {
       parseState("Lights", data.types.Light_Item);
       parseState("Appliances", data.types.X10_Appliance);
       
-      menu.show();
       splashWindow.hide();
+      menu.show();
     },
     function(error) {
       // Failure!
