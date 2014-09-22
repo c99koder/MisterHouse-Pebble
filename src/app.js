@@ -15,6 +15,9 @@ String.prototype.toCapitalize = function() {
 var UI = require('ui');
 var ajax = require('ajax');
 var Settings = require('settings');
+var Vibe = require('ui/vibe');
+var Accel = require('ui/accel');
+Accel.init();
 
 var sectionCount = 0;
 var splashWindow = new UI.Card({title:"MisterHouse"});
@@ -65,6 +68,7 @@ var reloadObjects = function() {
       
       splashWindow.hide();
       menu.show();
+      Vibe.vibrate('short');
     },
     function(error) {
       // Failure!
@@ -126,4 +130,8 @@ menu.on('select', function(e) {
   } else {
     setObjectState(e.item.name, "off");
   }
+});
+
+menu.on('accelTap', function(e) {
+  reloadObjects();
 });
